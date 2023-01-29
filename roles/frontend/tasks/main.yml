@@ -3,7 +3,12 @@
     name: nginx
     state: installed
 
-- name: Remove default html files of nginx
+- name: Remove html directory of nginx containing the default html files
   ansible.builtin.file:
     path: /usr/share/nginx/html
     state: absent
+
+- name: create html directory of files as per project requirement
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
