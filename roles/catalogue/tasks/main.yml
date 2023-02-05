@@ -43,6 +43,17 @@
     enabled: yes
     state: restarted
 
+- name: Copy mongodb repo file to inside of yumrepos inside the server
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Install mongodb server (yum package)
+  ansible.builtin.yum:
+    name: mongodb-org-shell
+    state: installed
+
+
 - name: load schema
   community.mongodb.mongodb_shell:
     login_host: mongodb-dev.practicaldevops.online
