@@ -30,3 +30,8 @@
   community.general.npm:
     path: /app
     state: latest
+
+- name: copy catalogue service file
+  ansible.builtin.copy:
+    src: catalogue.service
+    dest: /etc/systemd/system/catalogue.service
