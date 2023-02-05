@@ -43,8 +43,8 @@
     enabled: yes
     state: restarted
 
--name: load schema
- community.mongodb.mongodb_shell:
-   login_host: mongodb-dev.practicaldevops.online
-   file: "/app/schema/catalogue.js"
-   idempotent: yes
+- name: load schema
+  community.mongodb.mongodb_shell:
+    login_host: mongodb-dev.practicaldevops.online
+    file: "/app/schema/catalogue.js"
+    idempotent: yes
