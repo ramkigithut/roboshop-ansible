@@ -1,0 +1,32 @@
+- name: configure nodejs repos
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: install nodejs
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: Add application user
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Remove app directory of nodejs containing the default json files
+  ansible.builtin.file:
+    path: /app
+    state: absent
+
+- name: create app directory to store the files of catalogue component json files
+  ansible.builtin.file:
+    path: /app
+    state: directory
+
+- name: download catalogue app content
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+    dest: /app
+    remote_src: yes
+
+- name: Install nodejs dependencies based on package.json to their latest version
+  community.general.npm:
+    path: /app
+    state: latest
